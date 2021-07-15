@@ -1,15 +1,15 @@
 const express = require('express');
-const cors = require('cors');
+// const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const routers = require('./routes/index');
-const errorHandler = require('./middlewares/error-handler');
+const routes = require('./routes');
+const error = require('./middlewares/error-handler');
 
 require('dotenv').config();
 
-const { PORT = 3000, MONGO_URI = 'mongodb://localhost:27017' } = process.env;
+const { PORT = 3000, MONGO_URI = 'mongodb://localhost:27017/bitfilmsdb' } = process.env;
 
 const app = express();
 
@@ -25,22 +25,22 @@ mongoose.connect(MONGO_URI, {
 
 app.use(requestLogger);
 
-app.use(cors({
-  origin: [
-    'http://zomlesh.nomoredomains.club',
-    'https://zomlesh.nomoredomains.club',
-    'http://localhost:3000',
-  ],
-  credentials: true,
-}));
+// app.use(cors({
+//   origin: [
+//     'http://zomlesh.nomoredomains.club',
+//     'https://zomlesh.nomoredomains.club',
+//     'http://localhost:3000',
+//   ],
+//   credentials: true,
+// }));
 
-app.use(routers);
+app.use(routes);
 
 app.use(errorLogger);
 
 app.use(errors());
 
-app.use(errorHandler);
+app.use(error);
 
 app.listen(PORT, () => {
   console.log(`Сервер на порту ${PORT}`);

@@ -61,7 +61,7 @@ module.exports.createMovie = (req, res, next) => {
 };
 
 module.exports.deleteMovie = (req, res, next) => {
-  Movie.findById(req.params.cardId)
+  Movie.findById(req.params.movieId)
     .then((movie) => {
       if (!movie) {
         const err = new Error('Не найдено');
@@ -76,9 +76,9 @@ module.exports.deleteMovie = (req, res, next) => {
         err.statusCode = 403;
         next(err);
       } else {
-        Movie.findByIdAndRemove(req.params.cardId)
+        Movie.findByIdAndRemove(req.params.movieId)
           .then(() => {
-            res.send({ message: `Фильм ${req.params.cardId} удален` });
+            res.send({ message: `Фильм ${req.params.movieId} удален` });
           })
           .catch(() => {
             next();

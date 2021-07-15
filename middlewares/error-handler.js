@@ -1,4 +1,4 @@
-const error = require('express').Router;
+const error = require('express').Router();
 
 error.use((err, req, res, next) => {
   const status = err.statusCode || 500;
@@ -6,3 +6,5 @@ error.use((err, req, res, next) => {
   res.status(status).json({ message: message || 'Произошла ошибка на сервере' });
   return next();
 });
+
+module.exports = error;
