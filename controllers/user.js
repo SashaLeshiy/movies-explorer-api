@@ -1,10 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-
-require('dotenv').config();
-
-const { JWT_SECRET = 'dev-secret' } = process.env;
+const { JWT_SECRET } = require('../config');
 
 module.exports.getUser = (req, res, next) => {
   User.findOne({ _id: req.user._id })
