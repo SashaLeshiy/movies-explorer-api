@@ -36,9 +36,12 @@ userSchema.statics.findUserByCredentials = function compareDataUser(email, passw
           if (!matched) {
             const err = new Error('Неправильные почта или пароль');
             err.statusCode = 401;
-            next(err);
+            return next(err);
           }
           return user;
+        })
+        .catch((err) => {
+          next(err);
         });
     })
     .catch((err) => {

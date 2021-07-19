@@ -1,17 +1,17 @@
 const express = require('express');
+const helmet = require('helmet');
 // const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
+const { PORT, MONGO_URI } = require('./config');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const routes = require('./routes');
 const error = require('./middlewares/error-handler');
 
-require('dotenv').config();
-
-const { PORT = 3000, MONGO_URI = 'mongodb://localhost:27017/bitfilmsdb' } = process.env;
-
 const app = express();
+
+app.use(helmet());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

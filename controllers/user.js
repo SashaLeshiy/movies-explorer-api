@@ -14,7 +14,9 @@ module.exports.getUser = (req, res, next) => {
         err.statusCode = 404;
         next(err);
       } else {
-        res.send(user);
+        res.send({
+          name: user.name, email: user.email,
+        });
       }
     })
     .catch((err) => {
@@ -30,9 +32,7 @@ module.exports.createUser = (req, res, next) => {
       name: req.body.name,
     }))
     .then((user) => res.send({
-      data: {
-        name: user.name, email: user.email,
-      },
+      name: user.name, email: user.email,
     }))
     .catch((err) => {
       if (err.name === 'MongoError' && err.code === 11000) {
@@ -45,15 +45,17 @@ module.exports.createUser = (req, res, next) => {
 };
 
 module.exports.changeProfile = (req, res, next) => {
-  const { name, about } = req.body;
-  User.findByIdAndUpdate(req.user._id, { name, about }, { runValidators: true, new: true })
+  const { name, email } = req.body;
+  User.findByIdAndUpdate(req.user._id, { name, email }, { runValidators: true, new: true })
     .then((profile) => {
       if (!profile) {
         const err = new Error('Пользователь не найден');
         err.statusCode = 404;
         next(err);
       } else {
-        res.send(profile);
+        res.send({
+          email: profile.email, name: profile.name,
+        });
       }
     })
     .catch((err) => {
