@@ -77,3 +77,20 @@ module.exports.login = (req, res, next) => {
       next(err);
     });
 };
+
+module.exports.signout = (req, res, next) => {
+  User.findOne({ _id: req.user._id })
+    .then((user) => {
+      if (!user) {
+        const err = new Error('Пользователь не найден');
+        err.statusCode = 404;
+        next(err);
+      } else {
+        const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '1ms' });
+        res.cookie('jwt', token, { maxAge: 60, httpOnly: true }).send('Вы вышли');
+      }
+    })
+    .catch((err) => {
+      next(err);
+    });
+};

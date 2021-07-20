@@ -3,7 +3,7 @@ const cors = require('cors');
 const { celebrate, Joi } = require('celebrate');
 const user = require('./users');
 const movie = require('./movie');
-const { login, createUser } = require('../controllers/user');
+const { login, createUser, signout } = require('../controllers/user');
 const auth = require('../middlewares/auth');
 
 router.post('/signin', cors(), celebrate({
@@ -24,6 +24,7 @@ router.post('/signup', celebrate({
 router.use(auth);
 router.use('/', user);
 router.use('/', movie);
+router.post('/signout', signout);
 
 router.use((req, res, next) => {
   const err = new Error('Hе найдено');

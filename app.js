@@ -10,12 +10,6 @@ const routes = require('./routes');
 const error = require('./middlewares/error-handler');
 
 const app = express();
-
-app.use(helmet());
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
   useCreateIndex: true,
@@ -24,6 +18,9 @@ mongoose.connect(MONGO_URI, {
 });
 
 app.use(requestLogger);
+app.use(helmet());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // app.use(cors({
 //   origin: [
@@ -35,11 +32,8 @@ app.use(requestLogger);
 // }));
 
 app.use(routes);
-
 app.use(errorLogger);
-
 app.use(errors());
-
 app.use(error);
 
 app.listen(PORT, () => {
