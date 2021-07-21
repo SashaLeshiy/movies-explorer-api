@@ -7,7 +7,7 @@ const { errors } = require('celebrate');
 const { PORT, MONGO_URI } = require('./config');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const routes = require('./routes');
-const error = require('./middlewares/error-handler');
+const errorHandler = require('./middlewares/error-handler');
 
 const app = express();
 mongoose.connect(MONGO_URI, {
@@ -34,7 +34,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(routes);
 app.use(errorLogger);
 app.use(errors());
-app.use(error);
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Сервер на порту ${PORT}`);
