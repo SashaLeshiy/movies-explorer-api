@@ -12,7 +12,7 @@ module.exports.getUser = (req, res, next) => {
         next(err);
       } else {
         res.send({
-          name: user.name, email: user.email,
+          name: user.name, email: user.email, id: user.id,
         });
       }
     })
