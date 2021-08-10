@@ -29,7 +29,7 @@ module.exports.createUser = (req, res, next) => {
       name: req.body.name,
     }))
     .then((user) => res.send({
-      name: user.name, email: user.email,
+      name: user.name, email: user.email, id: user.id,
     }))
     .catch((err) => {
       if (err.name === 'MongoError' && err.code === 11000) {
