@@ -22,12 +22,12 @@
 
 
 **Ссылки**
-* https://zomlesh.nomoredomains.monster
+* frontend https://zomlesh.nomoredomains.monster ссылка на репозиторий: https://github.com/SashaLeshiy/movies-explorer-frontend
 * backend: https://api.zomlesh.nomoredomains.monster
 
 **IP**
 178.154.200.97
 
 #### Предложения и замечания можно отправлять по электронной почте:
-zomlesh@gmail.com
+zomlesh@yandex.ru
 
