@@ -38,7 +38,7 @@ const movieSchema = new mongoose.Schema({
     validate: [validator.isURL, 'Не валидный url'],
   },
   movieId: {
-    type: String,
+    type: Number,
     required: true,
   },
   nameRU: {

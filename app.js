@@ -25,8 +25,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({
   origin: [
     // 'http://zomlesh.nomoredomains.club',
-    // 'https://zomlesh.nomoredomains.club',
-    'http://localhost:3000',
+    'https://zomlesh.nomoredomains.monster',
+    // 'http://localhost:3000',
   ],
   credentials: true,
 }));
