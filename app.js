@@ -26,7 +26,7 @@ app.use(cors({
   origin: [
     // 'http://zomlesh.nomoredomains.club',
     'https://zomlesh.nomoredomains.monster',
-    'http://localhost:3000',
+    // 'http://localhost:3000',
   ],
   credentials: true,
 }));
